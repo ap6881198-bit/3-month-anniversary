@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Our 3 Month Anniversary ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:black;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* starry background */
+
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+0%,100%{opacity:0.2;}
+50%{opacity:1;}
+}
+
+/* main container */
+
+.container{
+background:rgba(0,0,0,0.6);
+padding:30px;
+border-radius:15px;
+max-width:600px;
+margin:80px auto;
+}
+
+/* buttons */
+
+button{
+padding:12px 20px;
+border:none;
+background:#ff4d6d;
+color:white;
+border-radius:8px;
+cursor:pointer;
+margin:10px;
+font-size:16px;
+}
+
+button:hover{
+background:#ff1f4b;
+}
+
+/* timer */
+
+#timer{
+font-size:20px;
+margin:15px;
+}
+
+/* floating hearts */
+
+.heart{
+position:fixed;
+bottom:-20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-100vh);opacity:0;}
+}
+
+/* popup */
+
+.popup{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:black;
+padding:25px;
+border-radius:10px;
+width:300px;
+z-index:20;
+}
+
+/* slideshow */
+
+.slideshow img{
+width:300px;
+border-radius:10px;
+}
+
+/* mini game */
+
+#game{
+display:none;
+margin-top:20px;
+}
+
+#player{
+font-size:30px;
+position:relative;
+left:0;
+}
+
+#goal{
+font-size:30px;
+position:relative;
+left:250px;
+}
+
+/* heart fireworks */
+
+.firework{
+position:fixed;
+font-size:25px;
+animation:explode 1.5s ease-out forwards;
+}
+
+@keyframes explode{
+0%{transform:scale(0);opacity:1;}
+100%{transform:scale(3);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Happy 3 Months ❤️</h1>
+
+<p>You make my life brighter every day.</p>
+
+<div id="timer"></div>
+
+<button onclick="openLetter()">Open Love Letter 💌</button>
+
+<button onclick="startGame()">Play Love Game 🎮</button>
+
+<button onclick="heartFireworks()">I Love You ❤️</button>
+
+<h2>Our Memories 📸</h2>
+
+<div class="slideshow">
+<img id="slide" src="photo1.jpg">
+</div>
+
+</div>
+
+<!-- love letter popup -->
+
+<div class="popup" id="letter">
+
+<h3>My Love ❤️</h3>
+
+<p>
+These 3 months with you have been the most beautiful time of my life.
+You make my world brighter and my heart happier every day.
+I can't wait to make more memories with you.
+</p>
+
+<button onclick="closeLetter()">Close</button>
+
+</div>
+
+<!-- mini love game -->
+
+<div id="game">
+
+<h2>Reach my heart ❤️</h2>
+
+<div id="player">🏃</div>
+<div id="goal">❤️</div>
+
+<p>Press RIGHT ARROW → to reach the heart</p>
+
+</div>
+
+<audio autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<script>
+
+/* relationship timer */
+
+var startDate = new Date("2025-12-01");
+
+function updateTimer(){
+
+var now = new Date();
+var diff = now - startDate;
+
+var days = Math.floor(diff/(1000*60*60*24));
+var hours = Math.floor(diff/(1000*60*60)%24);
+var minutes = Math.floor(diff/(1000*60)%60);
+
+document.getElementById("timer").innerHTML =
+"Together for ❤️ " + days + " days " + hours + " hours " + minutes + " minutes";
+
+}
+
+setInterval(updateTimer,1000);
+
+/* love letter popup */
+
+function openLetter(){
+document.getElementById("letter").style.display="block";
+}
+
+function closeLetter(){
+document.getElementById("letter").style.display="none";
+}
+
+/* floating hearts */
+
+function createHeart(){
+
+var heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*20)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+
+}
+
+setInterval(createHeart,400);
+
+/* stars */
+
+for(let i=0;i<120;i++){
+
+let star=document.createElement("div");
+
+star.classList.add("star");
+
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(star);
+
+}
+
+/* slideshow */
+
+var photos=["photo1.jpg","photo2.jpg","photo3.jpg"];
+
+var index=0;
+
+setInterval(function(){
+
+index++;
+if(index>=photos.length) index=0;
+
+document.getElementById("slide").src=photos[index];
+
+},3000);
+
+/* mini love game */
+
+function startGame(){
+document.getElementById("game").style.display="block";
+}
+
+var playerPos=0;
+
+document.addEventListener("keydown",function(e){
+
+if(e.key==="ArrowRight"){
+
+playerPos+=20;
+
+document.getElementById("player").style.left=playerPos+"px";
+
+if(playerPos>=250){
+
+alert("You reached my heart ❤️");
+
+}
+
+}
+
+});
+
+/* heart fireworks */
+
+function heartFireworks(){
+
+for(let i=0;i<40;i++){
+
+let heart=document.createElement("div");
+heart.classList.add("firework");
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),1500);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
